@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# opencode local config (secrets live in ~/.config/opencode/opencode.json)
+opencode.json
+opencode.jsonc
+
 # macOS-specific files
 .DS_Store
 
