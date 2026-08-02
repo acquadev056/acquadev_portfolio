@@ -1,13 +1,56 @@
 ---
 // About.astro - Split layout photo + story (Figma: "Section: Split Layout" #9:215)
+// Left column renders the GitHub profile README (fetched at build time) in sketchy style.
 import data from '../data/data.json';
+import { marked } from 'marked';
+
+const readmeRepo =
+  data.profile.readmeRepo ??
+  `${data.profile.githubUsername}/${data.profile.githubUsername}`;
+
+async function fetchReadme(repo: string): Promise<string | null> {
+  for (const branch of ['main', 'master']) {
+    try {
+      const res = await fetch(
+        `https://raw.githubusercontent.com/${repo}/${branch}/README.md`,
+      );
+      if (res.ok) return await res.text();
+    } catch {
+      // try next branch
+    }
+  }
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}/readme`, {
+      headers: {
+        Accept: 'application/vnd.github.raw+json',
+        'User-Agent': 'acquadev-portfolio',
+      },
+    });
+    if (res.ok) return await res.text();
+  } catch {
+    // fall back to placeholder
+  }
+  return null;
+}
+
+const readmeMarkdown = await fetchReadme(readmeRepo);
+const readmeHtml = readmeMarkdown
+  ? marked.parse(readmeMarkdown, { gfm: true, async: false })
+  : null;
 ---
 
 <div class="about-top-grid reveal-scroll">
-  <div class="portrait-col">
-    <div class="portrait-dashed-border" aria-hidden="true"></div>
-    <div class="portrait-frame">
-      <img src="/assets/about_portrait.png" alt={data.profile.name} class="portrait-img-about" />
+  <div class="readme-col">
+    <div class="readme-dashed-border" aria-hidden="true"></div>
+    <div class="readme-frame">
+      {readmeHtml ? (
+        <div class="readme-content" set:html={readmeHtml} />
+      ) : (
+        <p class="readme-fallback">
+          El README de <strong>{readmeRepo}</strong> aún no está disponible.
+          Se cargará automáticamente cuando se suba el repositorio a GitHub.
+        </p>
+      )}
     </div>
   </div>
 
@@ -50,14 +93,13 @@ import data from '../data/data.json';
     }
   }
 
-  .portrait-col {
+  .readme-col {
     position: relative;
     width: 100%;
-    max-width: 448px;
     justify-self: center;
   }
 
-  .portrait-dashed-border {
+  .readme-dashed-border {
     position: absolute;
     top: 16px;
     left: 16px;
@@ -65,19 +107,163 @@ import data from '../data/data.json';
     bottom: -16px;
     border: 2px dashed var(--primary);
     opacity: 0.5;
+    pointer-events: none;
   }
 
-  .portrait-frame {
+  .readme-frame {
     position: relative;
     border: 2px solid var(--primary);
     background: #FFFFFF;
+    border-radius: 128.5px 130px 114px 114px;
+    max-height: 560px;
+    overflow-y: auto;
+    padding: 32px 32px 40px;
   }
 
-  .portrait-img-about {
+  .readme-content {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 28px;
+    color: var(--on-surface-variant);
+  }
+
+  .readme-content > :first-child {
+    margin-top: 0;
+  }
+
+  .readme-content > :last-child {
+    margin-bottom: 0;
+  }
+
+  .readme-content h1,
+  .readme-content h2,
+  .readme-content h3,
+  .readme-content h4 {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+
+  .readme-content h1 {
+    font-size: 1.875rem;
+    margin: 32px 0 16px;
+  }
+
+  .readme-content h2 {
+    font-size: 1.5rem;
+    margin: 28px 0 12px;
+    border-bottom: 2px dashed var(--primary);
+    padding-bottom: 8px;
+  }
+
+  .readme-content h3 {
+    font-size: 1.25rem;
+    margin: 24px 0 8px;
+  }
+
+  .readme-content p {
+    margin: 12px 0;
+  }
+
+  .readme-content a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 2px solid var(--lime-accent);
+  }
+
+  .readme-content a:hover {
+    background-color: rgba(193, 241, 0, 0.5);
+  }
+
+  .readme-content ul,
+  .readme-content ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+
+  .readme-content li {
+    margin: 6px 0;
+  }
+
+  .readme-content li::marker {
+    color: var(--lime-accent);
+    font-weight: 700;
+  }
+
+  .readme-content code {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    background: var(--surface-container);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .readme-content pre {
+    background: var(--surface-container);
+    border: 1px dashed var(--primary);
+    border-radius: 24px 24px 24px 4px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  .readme-content pre code {
+    background: transparent;
+    padding: 0;
+    line-height: 22px;
+  }
+
+  .readme-content img {
+    max-width: 100%;
+    height: auto;
     display: block;
+    margin: 12px auto;
+  }
+
+  .readme-content blockquote {
+    margin: 16px 0;
+    padding: 8px 16px;
+    border-left: 3px solid var(--lime-accent);
+    font-style: italic;
+    background: var(--surface-container-low);
+    border-radius: 0 16px 16px 0;
+  }
+
+  .readme-content table {
+    border-collapse: collapse;
     width: 100%;
-    height: 253.22px;
-    object-fit: cover;
+    margin: 16px 0;
+  }
+
+  .readme-content th,
+  .readme-content td {
+    border: 1px dashed var(--on-surface-variant-soft);
+    padding: 8px 12px;
+    text-align: left;
+  }
+
+  .readme-content th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--surface-container-low);
+  }
+
+  .readme-content hr {
+    border: none;
+    border-top: 2px dashed var(--on-surface-variant-soft);
+    margin: 24px 0;
+  }
+
+  .readme-fallback {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 28px;
+    color: var(--on-surface-variant);
   }
 
   .bio-content {

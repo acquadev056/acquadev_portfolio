@@ -37,7 +37,8 @@ Single-page static Astro portfolio replicating a Figma design, in Spanish. Verif
 - `src/components/Button.astro`: the ONLY button component (variants `primary|outline|ghost|link|underline|display`, sizes `nav|sm|md|lg|xl`; renders `<a>` with `href` or `<button>` with `type`). Reuse it, never add new button classes.
 - `NavLink.astro` uses Button `variant="link"` + `active` class; the scrollspy in `Layout.astro` toggles `.active` (lime underline). It must run once on load and on scroll.
 - Sections: `Header`, `Hero`, `Projects`, `About`, `Timeline`, `Interests`, `SkillsMarquee`, `Contact`, `Footer`; assembled in `src/pages/index.astro` inside Layout.
-- Projects are fetched from the GitHub API at build time in `Projects.astro` (username from `data.profile.githubUsername`, forks excluded, paginated client-side 4 per page). Do NOT store projects in data.json.
+- Projects are fetched from the GitHub API at build time in `Projects.astro` (username from `data.profile.githubUsername`, forks excluded, paginated client-side 4 per page, 2-col grid). Do NOT store projects in data.json.
+- `About.astro` fetches the GitHub profile README at build time (`data.profile.readmeRepo`, falls back to `username/username`), renders it with `marked` into a sketchy-styled scrollable frame. If the repo doesn't exist yet, it shows a fallback note.
 - Design tokens live in `src/styles/global.css` (`--lime-accent: #C1F100`, `--page-gutter`, fonts: Bricolage Grotesque / Hanken Grotesk / JetBrains Mono). Section styles are scoped in each component.
 - Card/form bubbles use organic border-radius (e.g. project cards `128.5px 130px 114px 114px`; contact form `128.5px 130px 114px 14px`).
 
