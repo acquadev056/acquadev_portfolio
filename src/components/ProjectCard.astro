@@ -40,21 +40,21 @@ const {
         arrow && (
           <svg
             class="project-arrow"
-            width="22.5"
-            height="22.5"
+            width="20"
+            height="20"
             viewBox="0 0 22.5 22.5"
             fill="none"
             aria-hidden="true"
           >
             <path
               d="M4 18.5L18.5 4"
-              stroke="#000000"
+              stroke="currentColor"
               stroke-width="1.6"
               stroke-linecap="round"
             />
             <path
               d="M7.5 4H18.5v11"
-              stroke="#000000"
+              stroke="currentColor"
               stroke-width="1.6"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -85,7 +85,7 @@ const {
             >
               <path
                 d="M5.5 1l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L1.2 4.1l3-.4L5.5 1z"
-                stroke="#000000"
+                stroke="currentColor"
                 stroke-width="0.9"
                 stroke-linejoin="round"
               />
@@ -106,7 +106,7 @@ const {
             >
               <path
                 d="M5.5 1v7M3 3.5h5M5.5 8.5l-2.5-3.5M5.5 8.5L8 5"
-                stroke="#000000"
+                stroke="currentColor"
                 stroke-width="0.9"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -135,15 +135,28 @@ const {
 
   .project-card {
     background: var(--background);
-    border-radius: 14px;
-    padding: 32px;
+    border-radius: 12px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
     height: 100%;
+    border: 1px solid var(--grid-line);
+    text-align: center;
+    align-items: center;
     transition:
       background-color 0.3s ease,
       transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (min-width: 768px) {
+    .project-card {
+      padding: 32px;
+      gap: 16px;
+      border: none;
+      text-align: left;
+      align-items: stretch;
+    }
   }
 
   .project-card:hover {
@@ -153,9 +166,20 @@ const {
 
   .project-heading {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .project-heading {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
   }
 
   .project-arrow {
@@ -169,42 +193,76 @@ const {
 
   .project-title {
     font-family: var(--font-headline);
-    font-size: 2.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    line-height: 48px;
+    line-height: 1.2;
     color: var(--primary);
+    word-break: break-word;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .project-title {
+      font-size: 2.5rem;
+      text-align: left;
+    }
   }
 
   .project-summary {
     font-family: var(--font-body);
-    font-size: 1.25rem;
-    line-height: 32px;
+    font-size: 0.875rem;
+    line-height: 1.4;
     color: var(--on-surface-variant);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .project-summary {
+      font-size: 1.25rem;
+      line-height: 32px;
+      text-align: left;
+    }
   }
 
   .project-tools {
     font-family: var(--font-body);
     font-style: italic;
-    font-size: 1rem;
-    line-height: 25.6px;
+    font-size: 0.8125rem;
+    line-height: 1.3;
     color: var(--on-surface-variant);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .project-tools {
+      font-size: 1rem;
+      text-align: left;
+    }
   }
 
   .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  @media (min-width: 768px) {
+    .project-tags {
+      justify-content: flex-start;
+      gap: 12px;
+    }
   }
 
   .tag-pill {
     border: 1px solid var(--primary);
     border-radius: 128.5px 130px 114px 14px;
-    padding: 4px 12px;
+    padding: 3px 8px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 500;
-    line-height: 12px;
-    letter-spacing: 0.1em;
+    line-height: 10px;
+    letter-spacing: 0.08em;
     display: inline-flex;
     align-items: center;
     background: transparent;
@@ -222,25 +280,41 @@ const {
   .project-meta {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 10px;
     margin-top: auto;
-    padding-top: 8px;
+    padding-top: 6px;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .project-meta {
+      justify-content: flex-start;
+      gap: 16px;
+      padding-top: 8px;
+    }
   }
 
   .project-stat {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     color: var(--on-surface-variant);
     white-space: nowrap;
   }
 
   .project-stat-date {
-    margin-left: auto;
+    margin-left: 0;
+  }
+
+  @media (min-width: 768px) {
+    .project-stat-date {
+      margin-left: auto;
+    }
   }
 </style>

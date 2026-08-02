@@ -10,7 +10,9 @@ interface Props {
   dataNav?: string;
   target?: string;
   rel?: string;
+  role?: string;
   ariaLabel?: string;
+  ariaChecked?: boolean;
 }
 
 const {
@@ -23,18 +25,20 @@ const {
   dataNav,
   target,
   rel,
+  role,
   ariaLabel,
+  ariaChecked,
 } = Astro.props;
 
 const classes = ['btn', `btn-${variant}`, `btn-size-${size}`, className].join(' ').trim();
 ---
 
 {href ? (
-  <a href={href} id={id} class={classes} data-nav={dataNav} target={target} rel={rel} aria-label={ariaLabel}>
+  <a href={href} id={id} class={classes} data-nav={dataNav} target={target} rel={rel} role={role} aria-label={ariaLabel} aria-checked={ariaChecked}>
     <slot />
   </a>
 ) : (
-  <button type={type} id={id} class={classes} data-nav={dataNav} aria-label={ariaLabel}>
+  <button type={type} id={id} class={classes} data-nav={dataNav} role={role} aria-label={ariaLabel} aria-checked={ariaChecked}>
     <slot />
   </button>
 )}

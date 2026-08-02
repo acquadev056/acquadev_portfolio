@@ -11,10 +11,10 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
       <h2 class="skills-title">Mis Herramientas & Habilidades</h2>
     </div>
     <svg class="skills-scribble" width="913" height="16" viewBox="0 0 913 16" fill="none" aria-hidden="true">
-      <path d="M3 9 Q 150 1, 300 8 T 600 7 T 910 6" stroke="#000000" stroke-width="2.5" stroke-linecap="round" fill="none" />
+      <path d="M3 9 Q 150 1, 300 8 T 600 7 T 910 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" />
     </svg>
     <p class="skills-subtitle">
-      Un vistazo a las herramientas que utilizo diariamente para dar vida a ideas,<br />
+      Un vistazo a las herramientas que utilizo diariamente para dar vida a ideas,<br class="desktop-only" />
       trazadas desde el boceto inicial hasta la implementación final.
     </p>
   </div>
@@ -66,11 +66,29 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
 
 <style>
   .skills-section {
-    padding: 120px 0;
+    padding: 40px 0;
+  }
+
+  @media (min-width: 768px) {
+    .skills-section {
+      padding: 120px 0;
+    }
   }
 
   .skills-header {
-    margin-bottom: 64px;
+    margin-bottom: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .skills-header {
+      margin-bottom: 64px;
+      align-items: flex-start;
+      text-align: left;
+    }
   }
 
   .skills-title-wrap {
@@ -80,10 +98,10 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
 
   .header-highlight {
     position: absolute;
-    top: 60px;
+    bottom: 2px;
     left: 0;
     width: 100%;
-    height: 24px;
+    height: 12px;
     background: rgba(193, 241, 0, 0.5);
     border-radius: 2px;
     pointer-events: none;
@@ -91,11 +109,21 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
 
   .skills-title {
     font-family: var(--font-headline);
-    font-size: 4rem;
+    font-size: 1.75rem;
     font-weight: 800;
-    line-height: 70.4px;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--primary);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .skills-title {
+      font-size: 4rem;
+      text-align: left;
+    }
   }
 
   .skills-scribble {
@@ -106,11 +134,21 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
 
   .skills-subtitle {
     font-family: var(--font-body);
-    font-size: 1.25rem;
-    line-height: 32px;
+    font-size: 0.875rem;
+    line-height: 1.5;
     color: var(--on-surface-variant);
-    margin-top: 24px;
+    margin-top: 12px;
     max-width: 672px;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .skills-subtitle {
+      font-size: 1.25rem;
+      line-height: 32px;
+      margin-top: 24px;
+      text-align: left;
+    }
   }
 
   .marquee-stack {
@@ -121,12 +159,18 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
   }
 
   .marquee-band {
-    padding: 48px 0;
+    padding: 16px 0;
     overflow: hidden;
   }
 
+  @media (min-width: 768px) {
+    .marquee-band {
+      padding: 48px 0;
+    }
+  }
+
   .band-grey {
-    background: #EEEEEC;
+    background: var(--surface-container);
   }
 
   .band-lime {
@@ -137,7 +181,13 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
     display: flex;
     width: max-content;
     align-items: center;
-    gap: 32px;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .marquee-track {
+      gap: 32px;
+    }
   }
 
   .track-left {
@@ -161,30 +211,54 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
   .marquee-items {
     display: inline-flex;
     align-items: center;
-    gap: 32px;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .marquee-items {
+      gap: 32px;
+    }
   }
 
   .marquee-item {
     display: inline-flex;
     align-items: center;
-    gap: 32px;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .marquee-item {
+      gap: 32px;
+    }
   }
 
   .marquee-word {
     font-family: var(--font-headline);
-    font-size: 4rem;
+    font-size: 1.75rem;
     font-weight: 800;
-    line-height: 70.4px;
+    line-height: 1.2;
     letter-spacing: -0.05em;
     color: var(--primary);
     white-space: nowrap;
   }
 
+  @media (min-width: 768px) {
+    .marquee-word {
+      font-size: 4rem;
+    }
+  }
+
   .marquee-dot {
     font-family: 'Liberation Serif', 'Times New Roman', serif;
     font-weight: 800;
-    font-size: 3.375rem;
+    font-size: 1.5rem;
     line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .marquee-dot {
+      font-size: 3.375rem;
+    }
   }
 
   .dot-lime {
@@ -192,7 +266,17 @@ const bandLime = ['PostgreSQL', 'MongoDB', 'Redis', 'Flutter'];
   }
 
   .dot-black {
-    color: #000000;
+    color: var(--primary);
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .desktop-only {
+      display: inline;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

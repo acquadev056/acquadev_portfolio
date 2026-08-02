@@ -21,7 +21,7 @@ const lastName = nameParts[nameParts.length - 1];
       cx="64"
       cy="64"
       r="62"
-      stroke="#000000"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-dasharray="6 6"
       opacity="0.2"></circle>
@@ -31,9 +31,8 @@ const lastName = nameParts[nameParts.length - 1];
     <div class="hero-content">
       <h1 class="hero-title">
         Hola, soy<br />
-        <span class="hero-name-highlight">{firstNameLine}<br />{lastName}</span
-        ><br />
-        .<br />
+        <span class="hero-name-highlight">{firstNameLine}<br />{lastName}</span>
+        <br />
         Dibujo código y<br />
         diseño<br />
         experiencias.
@@ -57,12 +56,12 @@ const lastName = nameParts[nameParts.length - 1];
           >
             <path
               d="M1 6h13"
-              stroke="#000000"
+              stroke="currentColor"
               stroke-width="1.5"
               stroke-linecap="round"></path>
             <path
               d="M10 1.5L14.5 6 10 10.5"
-              stroke="#000000"
+              stroke="currentColor"
               stroke-width="1.5"
               stroke-linecap="round"
               stroke-linejoin="round"></path>
@@ -86,75 +85,138 @@ const lastName = nameParts[nameParts.length - 1];
 
 <style>
   .hero-section {
-    padding: 120px 0 0;
+    padding: 40px 0 0;
     position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .hero-section {
+      padding: 40px 0 0;
+    }
   }
 
   .hero-scribble {
     position: absolute;
-    top: 40px;
-    left: -24px;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     pointer-events: none;
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-scribble {
+      top: 40px;
+      left: -24px;
+      transform: none;
+      width: 128px;
+      height: 128px;
+    }
   }
 
   .hero-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 2rem;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    text-align: center;
   }
 
   @media (min-width: 900px) {
     .hero-layout {
       grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      text-align: left;
     }
   }
 
   .hero-title {
     font-family: var(--font-headline);
-    font-size: 4rem;
+    font-size: 2.25rem;
     font-weight: 800;
-    line-height: 70.4px;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--primary);
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 3rem;
+      text-align: left;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: 4rem;
+    }
   }
 
   .hero-name-highlight {
     background-color: rgba(193, 241, 0, 0.5);
     border-radius: 2px;
-    padding: 0 10px;
+    padding: 0 6px;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
 
   .hero-subtitle {
     font-family: var(--font-body);
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 400;
-    line-height: 32px;
+    line-height: 1.6;
     color: var(--on-surface-variant);
-    margin-bottom: 2.5rem;
+    margin: 0 auto 1.5rem;
     max-width: 576px;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-subtitle {
+      font-size: 1.25rem;
+      line-height: 32px;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
   }
 
   .hero-actions {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
     align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero-actions {
+      justify-content: flex-start;
+    }
   }
 
   .hero-sketch-card {
     position: relative;
     width: 100%;
-    max-width: 455.75px;
+    max-width: 340px;
+    margin: 0 auto;
     background: var(--background);
-    border-radius: 135px 120px 120px 135px;
-    padding: 16px;
+    border-radius: 48px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: stretch;
+  }
+
+  @media (min-width: 768px) {
+    .hero-sketch-card {
+      max-width: 455px;
+      border-radius: 135px 120px 120px 135px;
+      padding: 16px;
+    }
   }
 
   .corner-mark {
@@ -179,9 +241,22 @@ const lastName = nameParts[nameParts.length - 1];
 
   .portrait-img {
     width: 100%;
-    height: 500px;
+    height: 280px;
     object-fit: cover;
     display: block;
-    border-radius: 119px 104px 104px 119px;
+    border-radius: 40px;
+  }
+
+  @media (min-width: 640px) {
+    .portrait-img {
+      height: 360px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .portrait-img {
+      height: 500px;
+      border-radius: 119px 104px 104px 119px;
+    }
   }
 </style>

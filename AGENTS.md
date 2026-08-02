@@ -40,6 +40,7 @@ Single-page static Astro portfolio replicating a Figma design, in Spanish. Verif
 - Projects are fetched from the GitHub API at build time in `Projects.astro` (username from `data.profile.githubUsername`, forks excluded, paginated client-side 4 per page, 2-col grid). Do NOT store projects in data.json.
 - `About.astro` fetches the GitHub profile README at build time (`data.profile.readmeRepo`, falls back to `username/username`), renders it with `marked` into a sketchy-styled scrollable frame. If the repo doesn't exist yet, it shows a fallback note.
 - Design tokens live in `src/styles/global.css` (`--lime-accent: #C1F100`, `--page-gutter`, fonts: Bricolage Grotesque / Hanken Grotesk / JetBrains Mono). Section styles are scoped in each component.
+- Dark theme: `[data-theme="dark"]` block in `global.css` overrides the tokens. The toggle button (`#theme-toggle`) in `Header.astro` + the inline script in `Layout.astro` set `data-theme` on `<html>` (default = `prefers-color-scheme`, user choice persisted in `localStorage`). Use CSS variables / `currentColor` — never hardcode colors.
 - Card/form bubbles use organic border-radius (e.g. project cards `128.5px 130px 114px 114px`; contact form `128.5px 130px 114px 14px`).
 
 ### Secrets & MCP

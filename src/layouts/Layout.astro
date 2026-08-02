@@ -28,6 +28,41 @@ const {
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var stored = null;
+        try { stored = localStorage.getItem('theme'); } catch (e) {}
+        var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+        var isDark = stored ? stored === 'dark' : systemDark.matches;
+        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+
+        function syncCheck() {
+          var check = document.getElementById('theme-check');
+          if (check) check.checked = root.getAttribute('data-theme') === 'dark';
+        }
+
+        document.addEventListener('change', function (e) {
+          if (e.target && e.target.id === 'theme-check') {
+            var next = e.target.checked ? 'dark' : 'light';
+            root.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (err) {}
+          }
+        });
+
+        document.addEventListener('DOMContentLoaded', syncCheck);
+
+        systemDark.addEventListener('change', function (e) {
+          try {
+            if (!localStorage.getItem('theme')) {
+              var next = e.matches ? 'dark' : 'light';
+              root.setAttribute('data-theme', next);
+              syncCheck();
+            }
+          } catch (err) {}
+        });
+      })();
+    </script>
   </head>
   <body>
     <Header />

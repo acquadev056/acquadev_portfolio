@@ -6,24 +6,24 @@
   <div class="timeline-header">
     <h2 class="timeline-title">Mi Camino</h2>
     <svg width="199.53" height="16" viewBox="0 0 199.53 16" fill="none" aria-hidden="true">
-      <path d="M3 9 Q 50 1, 100 8 T 197 6" stroke="#000000" stroke-width="2.5" stroke-linecap="round" fill="none" />
+      <path d="M3 9 Q 50 1, 100 8 T 197 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" />
     </svg>
   </div>
 
   <div class="timeline-container">
-    <div class="timeline-line" aria-hidden="true"></div>
+    <div class="timeline-line desktop-only" aria-hidden="true"></div>
 
     <div class="timeline-row reveal-scroll delay-1">
       <div class="milestone-content text-right">
         <span class="label-caps milestone-period">Sep 2023 - Ago 2025</span>
-        <h3 class="milestone-title">IT. Multiplatform Software<br />Developer</h3>
+        <h3 class="milestone-title">IT. Multiplatform Software<br class="desktop-only" />Developer</h3>
         <p class="milestone-desc">Universidad Tecnológica de Nezahualcóyotl.<br />Graduated. Memory: "XPractice".</p>
       </div>
       <div class="timeline-badge">
         <svg width="19.92" height="16.27" viewBox="0 0 19.92 16.27" fill="none" aria-hidden="true">
-          <path d="M1 6.5l8.96-5 8.96 5-8.96 5L1 6.5z" stroke="#000000" stroke-width="1.6" stroke-linejoin="round" fill="none" />
-          <path d="M4.5 8.5v4.2c0 1.4 2 2.6 4.46 2.6s4.46-1.2 4.46-2.6V8.5" stroke="#000000" stroke-width="1.6" stroke-linecap="round" fill="none" />
-          <path d="M17.5 8v4" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
+          <path d="M1 6.5l8.96-5 8.96 5-8.96 5L1 6.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="none" />
+          <path d="M4.5 8.5v4.2c0 1.4 2 2.6 4.46 2.6s4.46-1.2 4.46-2.6V8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none" />
+          <path d="M17.5 8v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
         </svg>
       </div>
       <div class="milestone-empty"></div>
@@ -33,13 +33,13 @@
       <div class="milestone-empty"></div>
       <div class="timeline-badge">
         <svg width="19.87" height="12.3" viewBox="0 0 19.87 12.3" fill="none" aria-hidden="true">
-          <path d="M2.5 1.5l4.5 4.65-4.5 4.65" stroke="#000000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-          <path d="M17.37 1.5l-4.5 4.65 4.5 4.65" stroke="#000000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          <path d="M2.5 1.5l4.5 4.65-4.5 4.65" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          <path d="M17.37 1.5l-4.5 4.65 4.5 4.65" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
         </svg>
       </div>
       <div class="milestone-content text-left">
         <span class="label-caps milestone-period">May 2025 - Ago 2025</span>
-        <h3 class="milestone-title">Junior Developer - Express<br />Learning Online</h3>
+        <h3 class="milestone-title">Junior Developer - Express<br class="desktop-only" />Learning Online</h3>
         <ul class="milestone-list">
           <li>Lead design of UI for mobile/web</li>
           <li>Collaborate with cross-functional teams</li>
@@ -56,9 +56,9 @@
       </div>
       <div class="timeline-badge">
         <svg width="22.73" height="19.41" viewBox="0 0 22.73 19.41" fill="none" aria-hidden="true">
-          <rect x="1.5" y="5.7" width="19.73" height="12.21" rx="2.5" stroke="#000000" stroke-width="1.6" fill="none" />
-          <path d="M7.5 5.7V4.4a2.9 2.9 0 0 1 5.8 0v1.3" stroke="#000000" stroke-width="1.6" stroke-linecap="round" fill="none" />
-          <path d="M11.4 9.5v4.5M9.2 11.7h4.4" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
+          <rect x="1.5" y="5.7" width="19.73" height="12.21" rx="2.5" stroke="currentColor" stroke-width="1.6" fill="none" />
+          <path d="M7.5 5.7V4.4a2.9 2.9 0 0 1 5.8 0v1.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none" />
+          <path d="M11.4 9.5v4.5M9.2 11.7h4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
         </svg>
       </div>
       <div class="milestone-empty"></div>
@@ -68,7 +68,13 @@
 
 <style>
   .timeline-section {
-    margin-bottom: 120px;
+    margin-bottom: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-section {
+      margin-bottom: 120px;
+    }
   }
 
   .timeline-header {
@@ -77,25 +83,47 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-header {
+      margin-bottom: 4rem;
+    }
   }
 
   .timeline-title {
     font-family: var(--font-headline);
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 48px;
+    line-height: 1.2;
     color: var(--primary);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-title {
+      font-size: 2.5rem;
+    }
   }
 
   .timeline-container {
     position: relative;
     max-width: 1024px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 64px;
+    gap: 28px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-container {
+      padding: 0 24px;
+      gap: 64px;
+      align-items: stretch;
+    }
   }
 
   .timeline-line {
@@ -110,38 +138,76 @@
   }
 
   .timeline-row {
-    display: grid;
-    grid-template-columns: 1fr 48px 1fr;
-    gap: 24px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: 12px;
+    width: 100%;
+    border: 1px solid var(--grid-line);
+    border-radius: 12px;
+    padding: 16px;
+    background: var(--card-bg);
+  }
+
+  @media (min-width: 768px) {
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 1fr 48px 1fr;
+      gap: 24px;
+      align-items: center;
+      border: none;
+      padding: 0;
+      background: transparent;
+    }
   }
 
   .milestone-content {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
+    align-items: center;
+    text-align: center;
   }
 
-  .text-right { text-align: right; align-items: flex-end; }
-  .text-left { text-align: left; align-items: flex-start; }
+  @media (min-width: 768px) {
+    .text-right { text-align: right; align-items: flex-end; }
+    .text-left { text-align: left; align-items: flex-start; }
+  }
 
   .milestone-period {
     color: var(--on-surface-variant-soft);
+    font-size: 0.6875rem;
   }
 
   .milestone-title {
     font-family: var(--font-headline);
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
-    line-height: 36px;
+    line-height: 1.3;
     color: var(--primary);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .milestone-title {
+      font-size: 1.5rem;
+    }
   }
 
   .milestone-desc {
     font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 24px;
+    font-size: 0.8125rem;
+    line-height: 1.4;
     color: var(--on-surface-variant);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .milestone-desc {
+      font-size: 1rem;
+      line-height: 24px;
+    }
   }
 
   .milestone-list {
@@ -150,43 +216,69 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
     font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 24px;
+    font-size: 0.8125rem;
+    line-height: 1.4;
     color: var(--on-surface-variant);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .milestone-list {
+      align-items: flex-start;
+      font-size: 1rem;
+      line-height: 24px;
+      text-align: left;
+    }
   }
 
   .milestone-list li::before {
     content: '•';
-    margin-right: 0.75rem;
+    margin-right: 0.4rem;
+    color: var(--lime-accent);
   }
 
   .timeline-badge {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     background: var(--background);
     border: 2px solid var(--primary);
-    border-radius: 12px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    justify-self: center;
     z-index: 2;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    order: -1;
   }
 
-  .timeline-row:nth-child(3) .timeline-badge {
-    border-radius: 0;
+  @media (min-width: 768px) {
+    .timeline-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      order: initial;
+    }
   }
 
-  .timeline-row:nth-child(4) .timeline-badge {
-    border-radius: 4px;
+  .milestone-empty {
+    display: none;
   }
 
-  .timeline-row:hover .timeline-badge {
-    transform: scale(1.12) rotate(4deg);
-    background-color: var(--lime-accent);
+  @media (min-width: 768px) {
+    .milestone-empty {
+      display: block;
+      visibility: hidden;
+    }
   }
 
-  .milestone-empty { visibility: hidden; }
+  .desktop-only {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .desktop-only {
+      display: inline;
+    }
+  }
 </style>

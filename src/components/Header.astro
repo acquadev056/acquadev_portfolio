@@ -1,82 +1,242 @@
 ---
-// Header.astro - TopNavBar (Figma: EL-de29ac02 / #9:195)
-import NavLink from './NavLink.astro';
-import Button from './Button.astro';
-import data from '../data/data.json';
+// Header.astro - Single-row desktop | Hamburger mobile
+import NavLink from "./NavLink.astro";
+import Button from "./Button.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+import data from "../data/data.json";
 ---
 
 <header class="top-navbar">
-  <div class="nav-container">
-    <a href="#" class="brand-logo">{data.profile.aka}</a>
+  <a href="#" class="brand-logo">{data.profile.aka}</a>
 
-    <nav class="nav-links">
-      {data.navLinks.map((link) => (
+  <nav class="nav-center">
+    {
+      data.navLinks.map((link) => (
         <NavLink
           href={link.href}
           label={link.label}
           dataNav={link.dataNav}
-          isActive={link.dataNav === 'home'}
+          isActive={link.dataNav === "home"}
         />
-      ))}
-    </nav>
+      ))
+    }
+  </nav>
 
-    <Button href="#contact" variant="ghost" size="md">
-      HIRE ME
-    </Button>
+  <div class="nav-end">
+    <Button href="#contact" variant="ghost" size="md">HIRE ME</Button>
+    <ThemeToggle />
+    <button
+      class="hamburger"
+      id="menu-toggle"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+
+  <div class="mobile-overlay" id="mobile-overlay">
+    <nav class="mobile-nav">
+      {
+        data.navLinks.map((link) => (
+          <a href={link.href} class="mobile-link" data-nav={link.dataNav}>
+            {link.label}
+          </a>
+        ))
+      }
+      <div class="mobile-bottom">
+        <Button href="#contact" variant="primary" size="lg">HIRE ME</Button>
+      </div>
+    </nav>
   </div>
 </header>
+
+<script>
+  const btn = document.getElementById("menu-toggle");
+  const overlay = document.getElementById("mobile-overlay");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = overlay?.classList.toggle("open");
+    btn.classList.toggle("active", isOpen);
+    btn.setAttribute("aria-expanded", String(!!isOpen));
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  });
+
+  overlay?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      overlay.classList.remove("open");
+      btn?.classList.remove("active");
+      btn?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }),
+  );
+</script>
 
 <style>
   .top-navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(249, 249, 247, 0.95);
+    background: var(--header-bg);
     backdrop-filter: blur(8px);
-    border-bottom: 2px dashed #000000;
-  }
-
-  .nav-container {
-    width: 100%;
-    max-width: 1280px;
+    border-bottom: 2px dashed var(--primary);
+    max-width: 100%;
     margin: 0 auto;
-    padding: 16px 64px;
+    padding: 14px var(--page-gutter);
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: space-between;
     gap: 24px;
   }
 
   .brand-logo {
     font-family: var(--font-headline);
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 700;
-    line-height: 48px;
+    line-height: 1;
     color: var(--primary);
     text-decoration: none;
     letter-spacing: -0.02em;
-    transition: transform 0.2s ease;
+    flex-shrink: 0;
   }
 
   .brand-logo:hover {
     transform: scale(1.03);
   }
 
-  .nav-links {
-    display: none;
+  .nav-center {
+    flex: 1 1 auto;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 24px;
   }
 
-  @media (min-width: 768px) {
-    .nav-links {
-      display: flex;
-    }
+  .nav-end {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
 
+  /* Hamburger — hidden on desktop */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    background: transparent;
+    border: 1.5px solid var(--primary);
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    z-index: 1010;
+  }
+
+  .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile overlay — hidden on desktop */
+  .mobile-overlay {
+    display: none;
+  }
+
+  /* ── Mobile (< 768px) ── */
   @media (max-width: 767px) {
-    .nav-container {
-      padding: 12px 24px;
+    .top-navbar {
+      padding: 10px var(--page-gutter);
+    }
+
+    .nav-center {
+      display: none !important;
+    }
+
+    /* Hide HIRE ME button on mobile, keep toggle + hamburger */
+    .nav-end :global(.btn) {
+      display: none;
+    }
+
+    .brand-logo {
+      flex: 1;
+      font-size: 1.75rem;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .mobile-overlay {
+      display: block;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100vh;
+      background: var(--background);
+      border-left: 2px dashed var(--primary);
+      z-index: 999;
+      transform: translateX(100%);
+      visibility: hidden;
+      transition:
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.3s ease;
+    }
+
+    .mobile-overlay.open {
+      transform: translateX(0);
+      visibility: visible;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      height: 100%;
+      padding: 72px 24px 40px;
+    }
+
+    .mobile-link {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: color 0.2s ease;
+    }
+
+    .mobile-link:hover {
+      color: var(--lime-accent);
+    }
+
+    .mobile-bottom {
+      margin-top: 1px;
     }
   }
 </style>

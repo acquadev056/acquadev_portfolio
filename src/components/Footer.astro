@@ -30,18 +30,24 @@ const footerLinks = data.footerLinks.map((id) => data.links[id]);
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--primary);
+    border-top: 1px dashed var(--primary);
     background: var(--background);
-    margin-top: 120px;
+    margin-top: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .site-footer {
+      margin-top: 120px;
+    }
   }
 
   .footer-container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 24px 64px;
+    padding: 20px var(--page-gutter);
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: center;
     text-align: center;
   }
@@ -52,48 +58,70 @@ const footerLinks = data.footerLinks.map((id) => data.links[id]);
       justify-content: space-between;
       align-items: center;
       text-align: left;
+      gap: 1.5rem;
+      padding: 24px var(--page-gutter);
     }
   }
 
   .brand-logo {
     font-family: var(--font-headline);
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    line-height: 38.4px;
+    line-height: 1.2;
     color: var(--primary);
     text-decoration: none;
   }
 
+  @media (min-width: 768px) {
+    .brand-logo {
+      font-size: 2rem;
+    }
+  }
+
   .footer-copy {
     font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 25.6px;
+    font-size: 0.75rem;
+    line-height: 1.5;
     color: var(--on-surface-variant);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-copy {
+      font-size: 1rem;
+      text-align: left;
+    }
   }
 
   .footer-links {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .footer-links {
+      gap: 16px;
+    }
   }
 
   .footer-link {
     font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 25.6px;
+    font-size: 0.75rem;
+    line-height: 1.5;
     color: var(--on-surface-variant);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
-  .footer-link:hover {
-    color: var(--primary);
+  @media (min-width: 768px) {
+    .footer-link {
+      font-size: 1rem;
+    }
   }
 
-  @media (max-width: 767px) {
-    .footer-container {
-      padding: 24px;
-    }
+  .footer-link:hover {
+    color: var(--primary);
   }
 </style>

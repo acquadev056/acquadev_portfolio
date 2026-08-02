@@ -118,10 +118,10 @@ const formatDate = (iso: string) =>
     const render = () => {
       const from = (page - 1) * perPage;
       cards.forEach((card, index) => {
-        card.hidden = index < from || index >= from + perPage;
+        (card as HTMLElement).hidden = index < from || index >= from + perPage;
       });
-      if (prevBtn) prevBtn.disabled = page === 1;
-      if (nextBtn) nextBtn.disabled = page === totalPages;
+      if (prevBtn) (prevBtn as HTMLButtonElement).disabled = page === 1;
+      if (nextBtn) (nextBtn as HTMLButtonElement).disabled = page === totalPages;
       if (pageInfo) pageInfo.textContent = `${page} / ${totalPages}`;
     };
 
@@ -141,43 +141,75 @@ const formatDate = (iso: string) =>
 
 <style>
   .projects-section {
-    padding: 120px 0;
+    padding: 40px 0;
+  }
+
+  @media (min-width: 768px) {
+    .projects-section {
+      padding: 120px 0;
+    }
   }
 
   .projects-header {
     position: relative;
     display: flex;
     justify-content: center;
-    margin-bottom: 64px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  @media (min-width: 768px) {
+    .projects-header {
+      margin-bottom: 64px;
+    }
   }
 
   .header-highlight {
     position: absolute;
-    top: 70px;
-    width: 294px;
-    height: 21px;
+    bottom: 2px;
+    width: 180px;
+    height: 12px;
     background: rgba(193, 241, 0, 0.5);
     pointer-events: none;
   }
 
+  @media (min-width: 768px) {
+    .header-highlight {
+      bottom: 4px;
+      width: 294px;
+      height: 21px;
+    }
+  }
+
   .projects-title {
     font-family: var(--font-headline);
-    font-size: 4rem;
+    font-size: 1.75rem;
     font-weight: 800;
-    line-height: 70.4px;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--primary);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .projects-title {
+      font-size: 4rem;
+    }
   }
 
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 20px;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 768px) {
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
     }
   }
 
@@ -185,24 +217,27 @@ const formatDate = (iso: string) =>
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 24px;
-    margin-top: 64px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  @media (min-width: 768px) {
+    .projects-pagination {
+      gap: 24px;
+      margin-top: 64px;
+    }
   }
 
   .pagination-info {
     min-width: 56px;
     text-align: center;
     color: var(--on-surface-variant);
+    font-size: 0.75rem;
   }
 
   .projects-pagination :disabled {
     opacity: 0.4;
     pointer-events: none;
-  }
-
-  .load-more-wrap {
-    display: flex;
-    justify-content: center;
-    margin-top: 64px;
   }
 </style>
