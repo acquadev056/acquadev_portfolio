@@ -16,9 +16,9 @@ const { href, label, dataNav, isActive = false, isExternal = false, className = 
 
 <Button
   href={href}
-  variant={isActive ? 'underline' : 'link'}
+  variant="link"
   size="nav"
-  className={className}
+  className={`${isActive ? 'active' : ''} ${className}`.trim()}
   dataNav={dataNav}
   target={isExternal ? '_blank' : undefined}
   rel={isExternal ? 'noopener noreferrer' : undefined}

@@ -103,7 +103,7 @@ const {
         const sections = document.querySelectorAll('section[id]');
         const navItems = document.querySelectorAll('[data-nav]');
 
-        window.addEventListener('scroll', () => {
+        const updateNav = () => {
           let current = 'home';
           sections.forEach((section) => {
             const sectionTop = (section as HTMLElement).offsetTop - 140;
@@ -118,7 +118,10 @@ const {
               item.classList.add('active');
             }
           });
-        });
+        };
+
+        window.addEventListener('scroll', updateNav);
+        updateNav();
       });
     </script>
   </body>

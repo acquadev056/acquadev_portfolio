@@ -1,23 +1,38 @@
 ---
 // Hero.astro - Home hero (Figma: "Home - Sketch Portfolio" #9:145)
-import Button from './Button.astro';
-import data from '../data/data.json';
+import Button from "./Button.astro";
+import data from "../data/data.json";
 
-const nameParts = data.profile.name.split(' ');
-const firstNameLine = nameParts.slice(0, -1).join(' ');
+const nameParts = data.profile.name.split(" ");
+const firstNameLine = nameParts.slice(0, -1).join(" ");
 const lastName = nameParts[nameParts.length - 1];
 ---
 
 <section id="home" class="hero-section reveal-scroll">
-  <svg class="hero-scribble" width="128" height="128" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-    <circle cx="64" cy="64" r="62" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.2" />
+  <svg
+    class="hero-scribble"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128"
+    fill="none"
+    aria-hidden="true"
+  >
+    <circle
+      cx="64"
+      cy="64"
+      r="62"
+      stroke="#000000"
+      stroke-width="1.5"
+      stroke-dasharray="6 6"
+      opacity="0.2"></circle>
   </svg>
 
   <div class="hero-layout">
     <div class="hero-content">
       <h1 class="hero-title">
         Hola, soy<br />
-        <span class="hero-name-highlight">{firstNameLine}<br />{lastName}</span><br />
+        <span class="hero-name-highlight">{firstNameLine}<br />{lastName}</span
+        ><br />
         .<br />
         Dibujo código y<br />
         diseño<br />
@@ -25,27 +40,46 @@ const lastName = nameParts[nameParts.length - 1];
       </h1>
 
       <p class="hero-subtitle">
-        A Software Engineer with 1 year of experience developing mobile apps and software solutions. I’m also an open-source believer, so I create open-source products for developers around the world.
+        A Software Engineer with 1 year of experience developing mobile apps and
+        software solutions. I’m also an open-source believer, so I create
+        open-source products for developers around the world.
       </p>
 
       <div class="hero-actions">
         <Button href="#projects" variant="primary" size="lg">
           VER PROYECTOS
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
-            <path d="M1 6h13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" />
-            <path d="M10 1.5L14.5 6 10 10.5" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <svg
+            width="16"
+            height="12"
+            viewBox="0 0 16 12"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M1 6h13"
+              stroke="#000000"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <path
+              d="M10 1.5L14.5 6 10 10.5"
+              stroke="#000000"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
           </svg>
         </Button>
-        <Button href="#about" variant="link" size="nav">
-          SABER MÁS
-        </Button>
+        <Button href="#about" variant="link" size="nav"> SABER MÁS </Button>
       </div>
     </div>
 
     <div class="hero-sketch-card">
       <span class="corner-mark corner-tl" aria-hidden="true"></span>
       <span class="corner-mark corner-br" aria-hidden="true"></span>
-      <img src="/assets/hero_portrait.png" alt={data.profile.name} class="portrait-img" />
+      <img
+        src="/assets/hero_portrait.webp"
+        alt={data.profile.name}
+        class="portrait-img"
+      />
     </div>
   </div>
 </section>
@@ -145,7 +179,7 @@ const lastName = nameParts[nameParts.length - 1];
 
   .portrait-img {
     width: 100%;
-    height: 423.2px;
+    height: 500px;
     object-fit: cover;
     display: block;
     border-radius: 119px 104px 104px 119px;

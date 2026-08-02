@@ -112,6 +112,15 @@ const classes = ['btn', `btn-${variant}`, `btn-size-${size}`, className].join(' 
 
   .btn-link:hover {
     color: var(--primary);
+    border-bottom: 2px solid var(--lime-accent);
+    font-weight: 700;
+  }
+
+  /* Active nav item: lime bottom border (toggled by scrollspy) */
+  .btn-link.active {
+    border-bottom: 2px solid var(--lime-accent);
+    font-weight: 700;
+    color: var(--primary);
   }
 
   /* Active nav item: lime bottom border */
