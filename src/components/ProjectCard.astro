@@ -25,54 +25,97 @@ const {
   iconWidth = 50,
   iconHeight = 40,
   imageHeight = 300,
-  className = '',
+  className = "",
 } = Astro.props;
 ---
 
 <a
   href={href ?? undefined}
-  target={href ? '_blank' : undefined}
-  rel={href ? 'noopener noreferrer' : undefined}
+  target={href ? "_blank" : undefined}
+  rel={href ? "noopener noreferrer" : undefined}
   class="project-card-link"
 >
   <article class={`project-card ${className}`}>
     <div class="project-image" style={`height: ${imageHeight}px`}>
-      <svg width={iconWidth} height={iconHeight} viewBox="0 0 60 48" fill="none" aria-hidden="true">
-        <path d="M6 34c6-22 24-26 30-10 3.8 9.6-9 18.4-21 12" stroke="rgba(0,0,0,0.2)" stroke-width="2.5" stroke-linecap="round" fill="none" />
-        <path d="M12 40h38" stroke="rgba(0,0,0,0.2)" stroke-width="2.5" stroke-linecap="round" />
+      <svg
+        width={iconWidth}
+        height={iconHeight}
+        viewBox="0 0 60 48"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M6 34c6-22 24-26 30-10 3.8 9.6-9 18.4-21 12"
+          stroke="rgba(0,0,0,0.2)"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          fill="none"></path>
+        <path
+          d="M12 40h38"
+          stroke="rgba(0,0,0,0.2)"
+          stroke-width="2.5"
+          stroke-linecap="round"></path>
       </svg>
     </div>
 
     <div class="project-body">
-      {title && (
-        <div class="project-heading">
-          <h3 class="project-title">{title}</h3>
-          <div class="project-meta">
-            {stars !== undefined && stars > 0 && (
-              <span class="project-stars">
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-                  <path d="M5.5 1l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L1.2 4.1l3-.4L5.5 1z" stroke="#000000" stroke-width="0.9" stroke-linejoin="round" />
+      {
+        title && (
+          <div class="project-heading">
+            <h3 class="project-title">{title}</h3>
+            <div class="project-meta">
+              {stars !== undefined && stars > 0 && (
+                <span class="project-stars">
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 11 11"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5.5 1l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L1.2 4.1l3-.4L5.5 1z"
+                      stroke="#000000"
+                      stroke-width="0.9"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  {stars}
+                </span>
+              )}
+              {arrow && (
+                <svg
+                  width="22.5"
+                  height="22.5"
+                  viewBox="0 0 22.5 22.5"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 18.5L18.5 4"
+                    stroke="#000000"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M7.5 4H18.5v11"
+                    stroke="#000000"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
-                {stars}
-              </span>
-            )}
-            {arrow && (
-              <svg width="22.5" height="22.5" viewBox="0 0 22.5 22.5" fill="none" aria-hidden="true">
-                <path d="M4 18.5L18.5 4" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
-                <path d="M7.5 4H18.5v11" stroke="#000000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <p class="project-summary">{summary}</p>
       {tools && <p class="project-tools">{tools}</p>}
 
       <div class="project-tags">
-        {tags.map((tag) => (
-          <span class="tag-pill">{tag}</span>
-        ))}
+        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
       </div>
     </div>
   </article>
@@ -88,13 +131,15 @@ const {
 
   .project-card {
     background: var(--background);
-    border-radius: 128.5px 130px 114px 14px;
+    border-radius: 14px;
     padding: 32px;
     display: flex;
     flex-direction: column;
     gap: 24px;
     height: 100%;
-    transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .project-card:hover {
@@ -186,12 +231,13 @@ const {
     align-items: center;
     background: transparent;
     color: var(--on-background);
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
   }
 
   .tag-pill:hover {
     background-color: var(--lime-accent);
     transform: translateY(-2px);
   }
-
 </style>

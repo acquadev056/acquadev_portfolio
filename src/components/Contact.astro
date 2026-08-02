@@ -1,7 +1,7 @@
 ---
 // Contact.astro - "Hablemos" (Figma: "Contact - acquadev" #9:361)
-import Button from './Button.astro';
-import data from '../data/data.json';
+import Button from "./Button.astro";
+import data from "../data/data.json";
 ---
 
 <section id="contact" class="contact-section reveal-scroll">
@@ -14,56 +14,164 @@ import data from '../data/data.json';
         <p class="contact-quote">"Let's create something amazing together!"</p>
       </div>
 
-      <svg class="hand-drawn-arrow" width="200" height="150" viewBox="0 0 200 150" fill="none" aria-hidden="true">
-        <path d="M12 34 C 80 14, 150 44, 158 112 M 138 98 L 158 112 L 166 92" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      <svg
+        class="hand-drawn-arrow"
+        width="200"
+        height="150"
+        viewBox="0 0 200 150"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 34 C 80 14, 150 44, 158 112 M 138 98 L 158 112 L 166 92"
+          stroke="#000000"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"></path>
       </svg>
 
       <div class="socials">
-        {data.socialLinks.map((social) => (
-          <a href={social.href} class="social-link" target="_blank" rel="noopener noreferrer">
-            {social.icon === 'linkedin' ? (
-              <svg width="18" height="20" viewBox="0 0 18 20" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="16" height="18" rx="3" stroke="#4C4546" stroke-width="1.5" />
-                <path d="M5.5 14V8.5M5.5 6v.5" stroke="#4C4546" stroke-width="1.5" stroke-linecap="round" />
-                <rect x="8.5" y="9" width="4" height="5" rx="1" fill="#4C4546" />
-              </svg>
-            ) : (
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
-                <path d="M2.5 2l3.5 4-3.5 4" stroke="#4C4546" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                <path d="M10 2l3.5 4-3.5 4" stroke="#4C4546" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                <path d="M17.5 2l-3.5 4 3.5 4" stroke="#4C4546" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-              </svg>
-            )}
-            {social.label}
-          </a>
-        ))}
+        {
+          data.socialLinks.map((social) => (
+            <a
+              href={social.href}
+              class="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {social.icon === "linkedin" ? (
+                <svg
+                  width="18"
+                  height="20"
+                  viewBox="0 0 18 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="1"
+                    y="1"
+                    width="16"
+                    height="18"
+                    rx="3"
+                    stroke="#4C4546"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M5.5 14V8.5M5.5 6v.5"
+                    stroke="#4C4546"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="8.5"
+                    y="9"
+                    width="4"
+                    height="5"
+                    rx="1"
+                    fill="#4C4546"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  width="20"
+                  height="12"
+                  viewBox="0 0 20 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2.5 2l3.5 4-3.5 4"
+                    stroke="#4C4546"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M10 2l3.5 4-3.5 4"
+                    stroke="#4C4546"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M17.5 2l-3.5 4 3.5 4"
+                    stroke="#4C4546"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  />
+                </svg>
+              )}
+              {social.label}
+            </a>
+          ))
+        }
       </div>
     </div>
 
     <div class="contact-right">
       <div class="form-block">
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('¡Gracias! Tu mensaje ha sido enviado a {data.profile.name}.');">
+        <form
+          class="contact-form"
+          onsubmit="event.preventDefault(); alert('¡Gracias! Tu mensaje ha sido enviado a {data.profile.name}.');"
+        >
           <div class="form-group">
             <label for="name" class="label-caps form-label">TU NOMBRE</label>
-            <input type="text" id="name" required class="form-input" placeholder="John Doe" />
+            <input
+              type="text"
+              id="name"
+              required
+              class="form-input"
+              placeholder="John Doe"
+            />
           </div>
 
           <div class="form-group">
             <label for="email" class="label-caps form-label">TU EMAIL</label>
-            <input type="email" id="email" required class="form-input" placeholder="maximogomezcruz@gmail.com" />
+            <input
+              type="email"
+              id="email"
+              required
+              class="form-input"
+              placeholder="maximogomezcruz@gmail.com"
+            />
           </div>
 
           <div class="form-group">
             <label for="msg" class="label-caps form-label">MENSAJE</label>
-            <textarea id="msg" rows="4" required class="form-input form-textarea" placeholder="Cuéntame sobre tu proyecto..."></textarea>
+            <textarea
+              id="msg"
+              rows="4"
+              required
+              class="form-input form-textarea"
+              placeholder="Cuéntame sobre tu proyecto..."></textarea>
           </div>
 
           <div class="form-submit-row">
             <Button type="submit" variant="display" size="xl">
               Enviar mensaje
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M1.5 8L14 2l-3.5 12.5L8 10 1.5 8z" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" fill="none" />
-                <path d="M8 10L14 2" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" />
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 8L14 2l-3.5 12.5L8 10 1.5 8z"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"
+                  fill="none"></path>
+                <path
+                  d="M8 10L14 2"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"></path>
               </svg>
             </Button>
           </div>
@@ -101,7 +209,7 @@ import data from '../data/data.json';
   .contact-heading {
     font-family: var(--font-headline);
     font-size: 4rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 64px;
     letter-spacing: -0.02em;
     color: var(--primary);
@@ -177,7 +285,7 @@ import data from '../data/data.json';
     position: relative;
     flex: 1;
     background: var(--surface-container-low);
-    border-radius: 128.5px 130px 114px 14px;
+    border-radius: 14px;
     padding: 24px;
   }
 
@@ -202,7 +310,7 @@ import data from '../data/data.json';
     font-family: var(--font-body);
     font-size: 1.25rem;
     padding: 11px 12px;
-    background: #FFFFFF;
+    background: #ffffff;
     border: none;
     outline: none;
     color: var(--primary);
@@ -210,7 +318,7 @@ import data from '../data/data.json';
   }
 
   .form-input::placeholder {
-    color: #CFC4C5;
+    color: #cfc4c5;
   }
 
   .form-input:focus {
