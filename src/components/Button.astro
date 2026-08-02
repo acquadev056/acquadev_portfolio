@@ -1,0 +1,142 @@
+---
+// Button.astro - Single reusable button/link component (design tokens from Figma)
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'outline' | 'ghost' | 'link' | 'underline' | 'display';
+  size?: 'nav' | 'sm' | 'md' | 'lg' | 'xl';
+  className?: string;
+  id?: string;
+  dataNav?: string;
+  target?: string;
+  rel?: string;
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
+  className = '',
+  id,
+  dataNav,
+  target,
+  rel,
+  ariaLabel,
+} = Astro.props;
+
+const classes = ['btn', `btn-${variant}`, `btn-size-${size}`, className].join(' ').trim();
+---
+
+{href ? (
+  <a href={href} id={id} class={classes} data-nav={dataNav} target={target} rel={rel} aria-label={ariaLabel}>
+    <slot />
+  </a>
+) : (
+  <button type={type} id={id} class={classes} data-nav={dataNav} aria-label={ariaLabel}>
+    <slot />
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 0;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--lime-accent);
+    outline-offset: 2px;
+  }
+
+  .btn-size-nav { padding: 4px 8px; }
+  .btn-size-sm { padding: 8px 16px; }
+  .btn-size-md { padding: 8px 24px; }
+  .btn-size-lg { padding: 16px 32px; }
+  .btn-size-xl { padding: 16px 32px; }
+
+  /* Filled organic pill (hero CTA) */
+  .btn-primary {
+    background: var(--background);
+    border-color: var(--primary);
+    border-radius: 135px 120px 120px 135px;
+    font-weight: 700;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--lime-accent);
+    transform: translate(-2px, -2px);
+  }
+
+  /* Sharp outline square (Load More, nav Hire Me) */
+  .btn-outline {
+    border-color: var(--primary);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--lime-accent);
+    transform: translate(-2px, -2px);
+  }
+
+  /* Borderless organic pill (nav HIRE ME) */
+  .btn-ghost {
+    border-radius: 135px 120px 120px 135px;
+  }
+
+  .btn-ghost:hover {
+    background-color: rgba(193, 241, 0, 0.25);
+  }
+
+  /* Plain text link (SABER MÁS) */
+  .btn-link {
+    padding: 8px;
+    color: var(--on-surface-variant);
+  }
+
+  .btn-link:hover {
+    color: var(--primary);
+  }
+
+  /* Active nav item: lime bottom border */
+  .btn-underline {
+    border-bottom: 2px solid var(--lime-accent);
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .btn-underline:hover {
+    color: var(--primary);
+  }
+
+  /* Big headline text button (Enviar mensaje) */
+  .btn-display {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 38.4px;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    border-radius: 135px 120px 120px 135px;
+  }
+
+  .btn-display:hover {
+    background-color: rgba(193, 241, 0, 0.25);
+  }
+</style>

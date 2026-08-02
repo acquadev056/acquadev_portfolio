@@ -1,0 +1,195 @@
+---
+// Projects.astro - Live GitHub projects, 4-col grid with pagination (Figma: "Projects - Maximo Gomez Cruz" #9:446)
+import ProjectCard from './ProjectCard.astro';
+import Button from './Button.astro';
+
+interface GhRepo {
+  name: string;
+  description: string | null;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  fork: boolean;
+}
+
+const USERNAME = 'zenith056';
+const PER_PAGE = 4;
+
+let projects: GhRepo[] = [];
+
+try {
+  const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`, {
+    headers: {
+      'User-Agent': 'acquadev-portfolio',
+      Accept: 'application/vnd.github+json',
+    },
+  });
+  if (res.ok) {
+    const repos: GhRepo[] = await res.json();
+    projects = repos.filter((repo) => !repo.fork);
+  }
+} catch (error) {
+  console.error('GitHub fetch failed:', error);
+}
+
+const totalPages = Math.max(1, Math.ceil(projects.length / PER_PAGE));
+const needPagination = projects.length > PER_PAGE;
+const spanClass = projects.length > 0 && projects.length < PER_PAGE ? 'card-span-2' : '';
+---
+
+<section id="projects" class="projects-section reveal-scroll">
+  <div class="projects-header">
+    <span class="header-highlight" aria-hidden="true"></span>
+    <h2 class="projects-title">Proyectos</h2>
+  </div>
+
+  <div class="projects-grid" data-projects-grid>
+    {projects.map((project) => (
+      <ProjectCard
+        className={spanClass}
+        href={project.html_url}
+        title={project.name}
+        summary={project.description ?? 'Proyecto de código abierto en GitHub.'}
+        tools={`Stack: ${project.language ?? '—'}`}
+        tags={project.language ? [`#${project.language}`] : ['#OpenSource']}
+        stars={project.stargazers_count}
+        arrow={true}
+        iconWidth={55}
+        iconHeight={45}
+        imageHeight={300}
+      />
+    ))}
+  </div>
+
+  {needPagination && (
+    <div class="projects-pagination" id="projects-pagination">
+      <Button type="button" variant="outline" size="md" id="projects-prev" ariaLabel="Página anterior">
+        Anterior
+      </Button>
+      <span class="pagination-info label-caps" id="projects-page-info">1 / {totalPages}</span>
+      <Button type="button" variant="outline" size="md" id="projects-next" ariaLabel="Página siguiente">
+        Siguiente
+      </Button>
+    </div>
+  )}
+
+  <div class="load-more-wrap">
+    <Button type="button" variant="outline" size="lg">
+      Load More Sketches
+    </Button>
+  </div>
+</section>
+
+<script>
+  const grid = document.querySelector('[data-projects-grid]');
+
+  if (grid) {
+    const cards = Array.from(grid.children);
+    const perPage = 4;
+    let page = 1;
+    const totalPages = Math.max(1, Math.ceil(cards.length / perPage));
+    const prevBtn = document.getElementById('projects-prev');
+    const nextBtn = document.getElementById('projects-next');
+    const pageInfo = document.getElementById('projects-page-info');
+
+    const render = () => {
+      const from = (page - 1) * perPage;
+      cards.forEach((card, index) => {
+        card.hidden = index < from || index >= from + perPage;
+      });
+      if (prevBtn) prevBtn.disabled = page === 1;
+      if (nextBtn) nextBtn.disabled = page === totalPages;
+      if (pageInfo) pageInfo.textContent = `${page} / ${totalPages}`;
+    };
+
+    prevBtn?.addEventListener('click', () => {
+      page = Math.max(1, page - 1);
+      render();
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      page = Math.min(totalPages, page + 1);
+      render();
+    });
+
+    render();
+  }
+</script>
+
+<style>
+  .projects-section {
+    padding: 120px 0;
+  }
+
+  .projects-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 64px;
+  }
+
+  .header-highlight {
+    position: absolute;
+    top: 70px;
+    width: 294px;
+    height: 21px;
+    background: rgba(193, 241, 0, 0.5);
+    pointer-events: none;
+  }
+
+  .projects-title {
+    font-family: var(--font-headline);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 70.4px;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 600px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .projects-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .projects-grid .card-span-2 {
+      grid-column: span 2;
+    }
+  }
+
+  .projects-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 64px;
+  }
+
+  .pagination-info {
+    min-width: 56px;
+    text-align: center;
+    color: var(--on-surface-variant);
+  }
+
+  .projects-pagination :disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 64px;
+  }
+</style>

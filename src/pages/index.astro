@@ -1,17 +1,42 @@
 ---
-
+// index.astro - Single-page assembly of all sections
+import Layout from '../layouts/Layout.astro';
+import data from '../data/data.json';
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import About from '../components/About.astro';
+import Timeline from '../components/Timeline.astro';
+import Interests from '../components/Interests.astro';
+import SkillsMarquee from '../components/SkillsMarquee.astro';
+import Contact from '../components/Contact.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={`${data.profile.aka} // ${data.profile.name} - ${data.profile.role}`}>
+  <div class="page-container">
+    <Hero />
+
+    <Projects />
+
+    <section id="about" class="about-section">
+      <About />
+      <Timeline />
+      <Interests />
+    </section>
+
+    <SkillsMarquee />
+
+    <Contact />
+  </div>
+</Layout>
+
+<style>
+  .page-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--page-gutter);
+  }
+
+  .about-section {
+    padding: 120px 0;
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+// Header.astro - TopNavBar (Figma: EL-de29ac02 / #9:195)
+import NavLink from './NavLink.astro';
+import Button from './Button.astro';
+import data from '../data/data.json';
+---
+
+<header class="top-navbar">
+  <div class="nav-container">
+    <a href="#" class="brand-logo">{data.profile.aka}</a>
+
+    <nav class="nav-links">
+      {data.navLinks.map((link) => (
+        <NavLink
+          href={link.href}
+          label={link.label}
+          dataNav={link.dataNav}
+          isActive={link.dataNav === 'home'}
+        />
+      ))}
+    </nav>
+
+    <Button href="#contact" variant="ghost" size="md">
+      HIRE ME
+    </Button>
+  </div>
+</header>
+
+<style>
+  .top-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(249, 249, 247, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px dashed #000000;
+  }
+
+  .nav-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand-logo {
+    font-family: var(--font-headline);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 48px;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: transform 0.2s ease;
+  }
+
+  .brand-logo:hover {
+    transform: scale(1.03);
+  }
+
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .nav-container {
+      padding: 12px 24px;
+    }
+  }
+</style>

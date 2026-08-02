@@ -1,0 +1,97 @@
+---
+// Footer.astro - Site footer (Figma: EL-73754d1f)
+import data from "../data/data.json";
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <a href="#" class="brand-logo">{data.profile.aka}</a>
+    <p class="footer-copy">
+      © {new Date().getFullYear()} {data.profile.name}. Built with ink and code.
+    </p>
+    <div class="footer-links">
+      {
+        data.footerLinks.map((link) => (
+          <a
+            href={link.href}
+            class="footer-link"
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--primary);
+    background: var(--background);
+    margin-top: 120px;
+  }
+
+  .footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+  }
+
+  .brand-logo {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 38.4px;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .footer-copy {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 25.6px;
+    color: var(--on-surface-variant);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .footer-link {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 25.6px;
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--primary);
+  }
+
+  @media (max-width: 767px) {
+    .footer-container {
+      padding: 24px;
+    }
+  }
+</style>

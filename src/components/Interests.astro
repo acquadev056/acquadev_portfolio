@@ -1,0 +1,188 @@
+---
+// Interests.astro - "Lo que me mueve" (Figma: #9:288)
+---
+
+<div class="interests-section reveal-scroll">
+  <div class="interests-header">
+    <h2 class="interests-title">
+      Lo que me mueve
+      <svg class="doodle-loop" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M6 30 C 16 6, 32 6, 34 18 C 35 25, 24 32, 12 26" stroke="#C1F100" stroke-width="3.5" fill="none" stroke-linecap="round" />
+      </svg>
+    </h2>
+  </div>
+
+  <div class="interests-grid">
+    <article class="interest-card interest-card-1">
+      <div class="icon-square">
+        <svg width="16.31" height="26.13" viewBox="0 0 16.31 26.13" fill="none" aria-hidden="true">
+          <path d="M9.2 3.4L12.9 7.1 4.5 15.5l-3.2 2.6L2 14.9l7.2-11.5z" stroke="#000000" stroke-width="1.4" stroke-linejoin="round" fill="none" />
+          <path d="M9.9 2.7L12.9 5.7" stroke="#000000" stroke-width="1.4" stroke-linecap="round" />
+          <path d="M4.7 15.3c-1.6 2.4-2.8 6.4-3.3 9.8 3.4-.5 7.4-1.7 9.8-3.3" stroke="#000000" stroke-width="1.4" stroke-linecap="round" fill="none" />
+        </svg>
+      </div>
+      <h3 class="interest-title">Structural Harmony</h3>
+      <p class="interest-desc">
+        Finding the perfect balance between robust invisible grids and chaotic visible content.
+      </p>
+    </article>
+
+    <article class="interest-card interest-card-2">
+      <div class="icon-underline">
+        <svg width="23.6" height="23.51" viewBox="0 0 23.6 23.51" fill="none" aria-hidden="true">
+          <path d="M3 3.5c4.5 6.2 13 6.2 17.6 0" stroke="#000000" stroke-width="1.6" stroke-linecap="round" fill="none" />
+          <path d="M11.8 3.8v16" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
+          <path d="M3.5 22h16.6" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+      </div>
+      <h3 class="interest-title">Ink & Paper</h3>
+      <p class="interest-desc">
+        The analog world is my primary source of inspiration. Moleskines over monitors.
+      </p>
+    </article>
+
+    <article class="interest-card interest-card-3">
+      <div class="icon-dashed">
+        <svg width="28.47" height="28.47" viewBox="0 0 28.47 28.47" fill="none" aria-hidden="true">
+          <path d="M3.2 10.2h22.1c-1.4 9.2-7.1 14.3-11.05 14.3S4.6 19.4 3.2 10.2z" stroke="#000000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          <path d="M1.8 24.7h24.9" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
+          <path d="M14.2 3.5c0-1 .9-1.8 1.8-1.5 1.2.4 1.2 2.3 0 2.7" stroke="#000000" stroke-width="1.4" stroke-linecap="round" />
+        </svg>
+      </div>
+      <h3 class="interest-title">Caffeine & Code</h3>
+      <p class="interest-desc">
+        Fueling late-night debugging sessions and morning typography adjustments.
+      </p>
+    </article>
+  </div>
+</div>
+
+<style>
+  .interests-section {
+    margin-bottom: 60px;
+  }
+
+  .interests-header {
+    margin-bottom: 3rem;
+  }
+
+  .interests-title {
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-headline);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 48px;
+    color: var(--primary);
+  }
+
+  .doodle-loop {
+    position: absolute;
+    top: -16px;
+    right: -32px;
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+  }
+
+  .interests-header:hover .doodle-loop {
+    transform: rotate(12deg) scale(1.1);
+  }
+
+  .interests-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 900px) {
+    .interests-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .interest-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    border: 1px solid var(--primary);
+    border-radius: 135px 120px 120px 135px;
+    padding: 30px 31px 32px;
+  }
+
+  .interest-card::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -1px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 120px 135px 135px 120px;
+    pointer-events: none;
+  }
+
+  .interest-card-1 {
+    background: var(--background);
+  }
+
+  .interest-card-2 {
+    background: var(--surface-container-low);
+    padding-bottom: 56px;
+  }
+
+  .interest-card-3 {
+    background: var(--background);
+    height: 280px;
+    justify-content: center;
+  }
+
+  .icon-square,
+  .icon-underline,
+  .icon-dashed {
+    width: 67.26px;
+    height: 67.26px;
+    border: 1px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .interest-card-2 .icon-underline {
+    border: none;
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .interest-card-3 .icon-dashed {
+    width: 75.91px;
+    height: 75.91px;
+    border: 1px dashed var(--primary);
+    border-radius: 12px;
+  }
+
+  .interest-card:hover .icon-square,
+  .interest-card:hover .icon-underline,
+  .interest-card:hover .icon-dashed {
+    transform: scale(1.1) rotate(4deg);
+    background-color: var(--lime-accent);
+  }
+
+  .interest-title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 30px;
+    color: var(--primary);
+  }
+
+  .interest-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 24px;
+    color: var(--on-surface-variant);
+    max-width: 302px;
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+// About.astro - Split layout photo + story (Figma: "Section: Split Layout" #9:215)
+import data from '../data/data.json';
+---
+
+<div class="about-top-grid reveal-scroll">
+  <div class="portrait-col">
+    <div class="portrait-dashed-border" aria-hidden="true"></div>
+    <div class="portrait-frame">
+      <img src="/assets/about_portrait.png" alt={data.profile.name} class="portrait-img-about" />
+    </div>
+  </div>
+
+  <div class="bio-content">
+    <h2 class="about-title">
+      Hello, I'm
+      <span class="about-title-word">
+        <span class="lime-swipe" aria-hidden="true"></span>
+        JuniorDeveloper.
+      </span>
+    </h2>
+
+    <p class="text-body-lg about-paragraph">
+      I’m a creative and competitive developer, proactive learner, and a solution proposer.
+    </p>
+
+    <p class="text-body-lg about-paragraph about-paragraph-muted">
+      My work bridges the gap between architectural drafting and modern UI design. I don't just build interfaces; I sketch them, outline them, and leave the construction lines visible for those who appreciate the process.
+    </p>
+
+    <div class="status-underline label-caps">
+      CURRENT STATUS: SKETCHING IDEAS
+    </div>
+  </div>
+</div>
+
+<style>
+  .about-top-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 120px;
+  }
+
+  @media (min-width: 900px) {
+    .about-top-grid {
+      grid-template-columns: 5fr 7fr;
+      column-gap: 24px;
+    }
+  }
+
+  .portrait-col {
+    position: relative;
+    width: 100%;
+    max-width: 448px;
+    justify-self: center;
+  }
+
+  .portrait-dashed-border {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: -16px;
+    bottom: -16px;
+    border: 2px dashed var(--primary);
+    opacity: 0.5;
+  }
+
+  .portrait-frame {
+    position: relative;
+    border: 2px solid var(--primary);
+    background: #FFFFFF;
+  }
+
+  .portrait-img-about {
+    display: block;
+    width: 100%;
+    height: 253.22px;
+    object-fit: cover;
+  }
+
+  .bio-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-left: 0;
+  }
+
+  @media (min-width: 900px) {
+    .bio-content {
+      padding-left: 48px;
+    }
+  }
+
+  .about-title {
+    font-family: var(--font-headline);
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 80px;
+    letter-spacing: -0.05em;
+    color: var(--primary);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-title-word {
+    position: relative;
+    width: fit-content;
+  }
+
+  .lime-swipe {
+    position: absolute;
+    left: -4.38px;
+    bottom: 6px;
+    width: 110%;
+    height: 57.43px;
+    background: var(--lime-accent);
+    z-index: -1;
+  }
+
+  .about-paragraph {
+    color: var(--on-surface-variant);
+    margin: 0;
+  }
+
+  .about-paragraph-muted {
+    margin: 0;
+  }
+
+  .status-underline {
+    border-bottom: 2px dashed var(--on-surface-variant);
+    display: inline-block;
+    padding-bottom: 4px;
+    color: var(--on-surface-variant);
+    width: fit-content;
+  }
+</style>

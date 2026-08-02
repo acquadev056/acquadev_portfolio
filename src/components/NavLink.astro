@@ -1,0 +1,27 @@
+---
+// NavLink.astro - Nav item built on the shared Button component (active = lime underline)
+import Button from './Button.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  dataNav?: string;
+  isActive?: boolean;
+  isExternal?: boolean;
+  className?: string;
+}
+
+const { href, label, dataNav, isActive = false, isExternal = false, className = '' } = Astro.props;
+---
+
+<Button
+  href={href}
+  variant={isActive ? 'underline' : 'link'}
+  size="nav"
+  className={className}
+  dataNav={dataNav}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+>
+  {label}
+</Button>
