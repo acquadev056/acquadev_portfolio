@@ -1,7 +1,8 @@
 ---
 // Projects.astro - Live GitHub projects, 4-col grid with pagination (Figma: "Projects - Maximo Gomez Cruz" #9:446)
-import ProjectCard from './ProjectCard.astro';
-import Button from './Button.astro';
+import ProjectCard from "./ProjectCard.astro";
+import Button from "./Button.astro";
+import data from "../data/data.json";
 
 interface GhRepo {
   name: string;
@@ -9,32 +10,42 @@ interface GhRepo {
   html_url: string;
   language: string | null;
   stargazers_count: number;
+  forks_count: number;
+  updated_at: string;
   fork: boolean;
 }
 
-const USERNAME = 'zenith056';
+const USERNAME = data.profile.githubUsername;
 const PER_PAGE = 4;
 
 let projects: GhRepo[] = [];
 
 try {
-  const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`, {
-    headers: {
-      'User-Agent': 'acquadev-portfolio',
-      Accept: 'application/vnd.github+json',
+  const res = await fetch(
+    `https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`,
+    {
+      headers: {
+        "User-Agent": "acquadev-portfolio",
+        Accept: "application/vnd.github+json",
+      },
     },
-  });
+  );
   if (res.ok) {
     const repos: GhRepo[] = await res.json();
     projects = repos.filter((repo) => !repo.fork);
   }
 } catch (error) {
-  console.error('GitHub fetch failed:', error);
+  console.error("GitHub fetch failed:", error);
 }
 
 const totalPages = Math.max(1, Math.ceil(projects.length / PER_PAGE));
 const needPagination = projects.length > PER_PAGE;
-const spanClass = projects.length > 0 && projects.length < PER_PAGE ? 'card-span-2' : '';
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("es-MX", {
+    year: "numeric",
+    month: "short",
+  });
 ---
 
 <section id="projects" class="projects-section reveal-scroll">
@@ -44,53 +55,65 @@ const spanClass = projects.length > 0 && projects.length < PER_PAGE ? 'card-span
   </div>
 
   <div class="projects-grid" data-projects-grid>
-    {projects.map((project) => (
-      <ProjectCard
-        className={spanClass}
-        href={project.html_url}
-        title={project.name}
-        summary={project.description ?? 'Proyecto de código abierto en GitHub.'}
-        tools={`Stack: ${project.language ?? '—'}`}
-        tags={project.language ? [`#${project.language}`] : ['#OpenSource']}
-        stars={project.stargazers_count}
-        arrow={true}
-        iconWidth={55}
-        iconHeight={45}
-        imageHeight={300}
-      />
-    ))}
+    {
+      projects.map((project) => (
+        <ProjectCard
+          href={project.html_url}
+          title={project.name}
+          summary={
+            project.description ?? "Proyecto de código abierto en GitHub."
+          }
+          tools={`Stack: ${project.language ?? "—"}`}
+          tags={project.language ? [`#${project.language}`] : ["#OpenSource"]}
+          stars={project.stargazers_count}
+          forks={project.forks_count}
+          updatedAt={`Actualizado ${formatDate(project.updated_at)}`}
+          arrow={true}
+        />
+      ))
+    }
   </div>
 
-  {needPagination && (
-    <div class="projects-pagination" id="projects-pagination">
-      <Button type="button" variant="outline" size="md" id="projects-prev" ariaLabel="Página anterior">
-        Anterior
-      </Button>
-      <span class="pagination-info label-caps" id="projects-page-info">1 / {totalPages}</span>
-      <Button type="button" variant="outline" size="md" id="projects-next" ariaLabel="Página siguiente">
-        Siguiente
-      </Button>
-    </div>
-  )}
-
-  <div class="load-more-wrap">
-    <Button type="button" variant="outline" size="lg">
-      Load More Sketches
-    </Button>
-  </div>
+  {
+    needPagination && (
+      <div class="projects-pagination" id="projects-pagination">
+        <Button
+          type="button"
+          variant="outline"
+          size="md"
+          id="projects-prev"
+          ariaLabel="Página anterior"
+        >
+          Anterior
+        </Button>
+        <span class="pagination-info label-caps" id="projects-page-info">
+          1 / {totalPages}
+        </span>
+        <Button
+          type="button"
+          variant="outline"
+          size="md"
+          id="projects-next"
+          ariaLabel="Página siguiente"
+        >
+          Siguiente
+        </Button>
+      </div>
+    )
+  }
 </section>
 
 <script>
-  const grid = document.querySelector('[data-projects-grid]');
+  const grid = document.querySelector("[data-projects-grid]");
 
   if (grid) {
     const cards = Array.from(grid.children);
     const perPage = 4;
     let page = 1;
     const totalPages = Math.max(1, Math.ceil(cards.length / perPage));
-    const prevBtn = document.getElementById('projects-prev');
-    const nextBtn = document.getElementById('projects-next');
-    const pageInfo = document.getElementById('projects-page-info');
+    const prevBtn = document.getElementById("projects-prev");
+    const nextBtn = document.getElementById("projects-next");
+    const pageInfo = document.getElementById("projects-page-info");
 
     const render = () => {
       const from = (page - 1) * perPage;
@@ -102,12 +125,12 @@ const spanClass = projects.length > 0 && projects.length < PER_PAGE ? 'card-span
       if (pageInfo) pageInfo.textContent = `${page} / ${totalPages}`;
     };
 
-    prevBtn?.addEventListener('click', () => {
+    prevBtn?.addEventListener("click", () => {
       page = Math.max(1, page - 1);
       render();
     });
 
-    nextBtn?.addEventListener('click', () => {
+    nextBtn?.addEventListener("click", () => {
       page = Math.min(totalPages, page + 1);
       render();
     });
@@ -149,22 +172,12 @@ const spanClass = projects.length > 0 && projects.length < PER_PAGE ? 'card-span
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
   }
 
   @media (min-width: 600px) {
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1000px) {
-    .projects-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .projects-grid .card-span-2 {
-      grid-column: span 2;
     }
   }
 

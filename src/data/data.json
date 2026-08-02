@@ -8,8 +8,26 @@
     "location": "México",
     "school": "Universidad Tecnológica de Nezahualcóyotl",
     "grade": "Ingeniería en Software",
-    "githubUsername": "zenith056",
-    "github": "https://github.com/zenith056"
+    "githubUsername": "acquadev056"
+  },
+  "links": {
+    "linkedin": {
+      "label": "LinkedIn",
+      "href": "https://linkedin.com/in/maximogomezcruz/",
+      "icon": "linkedin",
+      "external": true
+    },
+    "github": {
+      "label": "GitHub",
+      "href": "https://github.com/acquadev056",
+      "icon": "github",
+      "external": true
+    },
+    "backToTop": {
+      "label": "Back to Top",
+      "href": "#",
+      "external": false
+    }
   },
   "navLinks": [
     {
@@ -39,32 +57,12 @@
     }
   ],
   "socialLinks": [
-    {
-      "label": "LINKEDIN",
-      "href": "https://linkedin.com/in/maximogomezcruz/",
-      "icon": "linkedin"
-    },
-    {
-      "label": "GITHUB",
-      "href": "https://github.com/zenith056",
-      "icon": "github"
-    }
+    "linkedin",
+    "github"
   ],
   "footerLinks": [
-    {
-      "label": "LinkedIn",
-      "href": "https://linkedin.com/in/maximogomezcruz/",
-      "external": true
-    },
-    {
-      "label": "GitHub",
-      "href": "https://github.com/zenith056",
-      "external": true
-    },
-    {
-      "label": "Back to Top",
-      "href": "#",
-      "external": false
-    }
+    "linkedin",
+    "github",
+    "backToTop"
   ]
 }

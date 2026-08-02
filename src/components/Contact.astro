@@ -2,6 +2,9 @@
 // Contact.astro - "Hablemos" (Figma: "Contact - acquadev" #9:361)
 import Button from "./Button.astro";
 import data from "../data/data.json";
+
+const socialLinks = data.socialLinks.map((id) => data.links[id]);
+const profile = data.profile;
 ---
 
 <section id="contact" class="contact-section reveal-scroll">
@@ -33,7 +36,7 @@ import data from "../data/data.json";
 
       <div class="socials">
         {
-          data.socialLinks.map((social) => (
+          socialLinks.map((social) => (
             <a
               href={social.href}
               class="social-link"
@@ -117,7 +120,7 @@ import data from "../data/data.json";
       <div class="form-block">
         <form
           class="contact-form"
-          onsubmit="event.preventDefault(); alert('¡Gracias! Tu mensaje ha sido enviado a {data.profile.name}.');"
+          onsubmit="event.preventDefault(); alert('¡Gracias! Tu mensaje ha sido enviado a {profile.name}.');"
         >
           <div class="form-group">
             <label for="name" class="label-caps form-label">TU NOMBRE</label>
@@ -126,7 +129,7 @@ import data from "../data/data.json";
               id="name"
               required
               class="form-input"
-              placeholder="John Doe"
+              placeholder={profile.shortName}
             />
           </div>
 
@@ -137,7 +140,7 @@ import data from "../data/data.json";
               id="email"
               required
               class="form-input"
-              placeholder="maximogomezcruz@gmail.com"
+              placeholder={profile.email}
             />
           </div>
 

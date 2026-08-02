@@ -1,6 +1,8 @@
 ---
 // Footer.astro - Site footer (Figma: EL-73754d1f)
 import data from "../data/data.json";
+
+const footerLinks = data.footerLinks.map((id) => data.links[id]);
 ---
 
 <footer class="site-footer">
@@ -11,7 +13,7 @@ import data from "../data/data.json";
     </p>
     <div class="footer-links">
       {
-        data.footerLinks.map((link) => (
+        footerLinks.map((link) => (
           <a
             href={link.href}
             class="footer-link"
