@@ -98,6 +98,17 @@ const readmeHtml = readmeMarkdown
     position: relative;
     width: 100%;
     justify-self: center;
+    overflow: hidden;
+    padding-right: 6px;
+    padding-bottom: 6px;
+  }
+
+  @media (min-width: 768px) {
+    .readme-col {
+      overflow: visible;
+      padding-right: 0;
+      padding-bottom: 0;
+    }
   }
 
   .readme-dashed-border {
